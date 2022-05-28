@@ -1,1 +1,2 @@
 tweepy==4.9.0
+mysql-connector-python==8.0.29
