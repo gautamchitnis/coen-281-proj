@@ -1,2 +1,4 @@
 tweepy==4.9.0
 mysql-connector-python==8.0.29
+mysqlclient==2.1.0
+Django==4.0.4

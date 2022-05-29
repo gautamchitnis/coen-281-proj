@@ -1,7 +1,7 @@
 import json
 import mysql.connector
 
-from utils.SaveStream import SaveStream
+from coen281.utils import SaveStream
 
 
 if __name__ == '__main__':
