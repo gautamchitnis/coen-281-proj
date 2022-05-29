@@ -5,3 +5,6 @@ create table coen281.tweets (
     author_id bigint,
     tweet_text varchar(300)
                             )
+
+ALTER TABLE tweets
+ADD clean_tweet varchar(300);
