@@ -1,4 +1,5 @@
 import tweepy
+from decouple import config
 
 
 class Auth:
@@ -24,13 +25,10 @@ class Auth:
 
     def set_auth_keys(self, keys=None):
         if keys is None:
-            # TODO: Set Key values here
-            # TODO: Use env or a file to populate keys
-
-            self.keys.consumer_key = ""
-            self.keys.consumer_secret = ""
-            self.keys.access_token = ""
-            self.keys.access_token_secret = ""
+            self.keys.consumer_key = config('TWITTER_CONSUMER_KEY')
+            self.keys.consumer_secret = config('TWITTER_CONSUMER_SECRET')
+            self.keys.access_token = config('TWITTER_ACCESS_TOKEN')
+            self.keys.access_token_secret = config('TWITTER_ACCESS_TOKEN_SECRET')
         else:
             self.keys.consumer_key = keys.consumer_key
             self.keys.consumer_secret = keys.consumer_secret
