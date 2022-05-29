@@ -9,7 +9,7 @@ class SaveStream:
         auth.set_auth_keys()
         keys = auth.get_auth_keys()
         tsc_man = TSCManager()
-        t_printer = tsc_man.get_tweet_printer_instance(keys.access_token, count=count)
+        t_printer = tsc_man.get_tweet_printer_instance(keys.bearer_token, count=count)
         print("Start Twitter Stream Processing")
 
         t_printer.sample(expansions="author_id", tweet_fields="lang")

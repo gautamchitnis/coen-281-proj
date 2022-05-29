@@ -9,6 +9,7 @@ class Auth:
         consumer_secret = ""
         access_token = ""
         access_token_secret = ""
+        bearer_token = ""
 
     def __init__(self):
         self.keys = self.Keys()
@@ -29,11 +30,13 @@ class Auth:
             self.keys.consumer_secret = config('TWITTER_CONSUMER_SECRET')
             self.keys.access_token = config('TWITTER_ACCESS_TOKEN')
             self.keys.access_token_secret = config('TWITTER_ACCESS_TOKEN_SECRET')
+            self.keys.bearer_token = config('TWITTER_BEARER_TOKEN')
         else:
             self.keys.consumer_key = keys.consumer_key
             self.keys.consumer_secret = keys.consumer_secret
             self.keys.access_token = keys.access_token
             self.keys.access_token_secret = keys.access_token_secret
+            self.keys.bearer_token = keys.bearer_token
 
     def get_auth_keys(self):
         return self.keys
