@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'coen281',
     'stage_1',
+    'stage_2',
     'utils',
     'django.contrib.admin',
     'django.contrib.auth',

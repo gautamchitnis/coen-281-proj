@@ -7,3 +7,5 @@ class Tweets(models.Model):
     author_id = models.BigIntegerField()
     tweet_text = models.CharField(max_length=1000)
     tweet_clean = models.CharField(max_length=1000, default="")
+    sentiment_done = models.BooleanField(default=False)
+    sentiment_score = models.FloatField(default=0)
