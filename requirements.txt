@@ -3,3 +3,4 @@ mysql-connector-python==8.0.29
 mysqlclient==2.1.0
 Django==4.0.4
 python-decouple~=3.6
+nltk~=3.7
