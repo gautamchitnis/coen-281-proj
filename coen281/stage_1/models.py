@@ -6,3 +6,4 @@ class Tweets(models.Model):
     tweet_id = models.BigIntegerField(primary_key=True)
     author_id = models.BigIntegerField()
     tweet_text = models.CharField(max_length=1000)
+    tweet_clean = models.CharField(max_length=1000, default="")
