@@ -24,6 +24,19 @@ class Auth:
         api = tweepy.API(auth)
         return api
 
+    def get_client(self):
+        keys = self.keys
+
+        client = tweepy.Client(
+            bearer_token=keys.bearer_token,
+            consumer_key=keys.consumer_key,
+            consumer_secret=keys.consumer_secret,
+            access_token=keys.access_token,
+            access_token_secret=keys.access_token_secret
+        )
+
+        return client
+
     def set_auth_keys(self, keys=None):
         if keys is None:
             self.keys.consumer_key = config('TWITTER_CONSUMER_KEY')

@@ -27,7 +27,13 @@ class Command(BaseCommand):
                         )
                         tweet_author.save()
                     # TODO: perf sent anal
+                    sentiment = 0
                     up_tweet.sentiment_done = True
+                    up_tweet.sentiment_score = sentiment
                     up_tweet.save()
+                    if sentiment == 0:
+                        tweet_author.neg_count += 1
+                        tweet_author.l1 = True
+                        tweet_author.save()
 
             # TODO: Add Sleep
