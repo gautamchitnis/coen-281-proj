@@ -8,6 +8,8 @@ class Authors(models.Model):
     l1_done = models.BooleanField(default=False)
     l2 = models.BooleanField(default=False)
     l2_done = models.BooleanField(default=False)
+    l3 = models.BooleanField(default=False)
+    l3_done = models.BooleanField(default=False)
     neutral_count = models.IntegerField(default=0)
     pos_count = models.IntegerField(default=0)
     neg_count = models.IntegerField(default=0)
