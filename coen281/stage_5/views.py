@@ -6,7 +6,7 @@ from utils.ChartManager import ChartManager
 
 # Create your views here.
 def index(request):
-    authors = Authors.objects.filter(l1_done=True, l2_done=True, l3_done=True).order_by("-neg_count")
+    authors = Authors.objects.filter(l1_done=True, l2_done=True, l3_done=True).order_by("-neg_count")[0:10]
     author_list = []
     for idx, author in enumerate(authors):
         author_list.append(
@@ -31,7 +31,7 @@ def overall(request):
     neu_count = Tweets.objects.filter(sentiment_score=1).count()
     pos_count = Tweets.objects.filter(sentiment_score=2).count()
 
-    x = ("Negative", "Neutral", "Negative")
+    x = ("Negative", "Neutral", "Positive")
     y = (neg_count, neu_count, pos_count)
 
     chart_sent = chart_man.get_bar_graph(x, y)
@@ -90,7 +90,7 @@ def author_det(request, a_id):
     neu_count = Tweets.objects.filter(author_id=a_id, sentiment_score=1).count()
     pos_count = Tweets.objects.filter(author_id=a_id, sentiment_score=2).count()
 
-    x = ("Negative", "Neutral", "Negative")
+    x = ("Negative", "Neutral", "Positive")
     y = (neg_count, neu_count, pos_count)
 
     chart_sent = chart_man.get_bar_graph(x, y)

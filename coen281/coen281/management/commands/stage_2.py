@@ -47,5 +47,3 @@ class Command(BaseCommand):
 
                     up_tweet.save()
                     tweet_author.save()
-
-            # TODO: Add Sleep

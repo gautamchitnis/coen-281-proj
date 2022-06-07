@@ -22,7 +22,7 @@ class TSCManager:
                         "author_id": data["author_id"],
                         "text": data["text"]
                     }
-                    print(f"Processed {self.processed_counter} Tweets")
+                    # print(f"Processed {self.processed_counter} Tweets")
                 return True
             else:
                 self.disconnect()

@@ -1,3 +1,5 @@
+import time
+
 import tweetnlp
 from django.core.management.base import BaseCommand, CommandError
 from utils.SaveStream import SaveStream
@@ -8,13 +10,13 @@ from utils.Auth import Auth
 
 
 class Command(BaseCommand):
-    help = 'Start User Extraction'
+    help = 'Start L2 Exploration'
 
     # def add_arguments(self, parser):
     #     parser.add_argument('--num_tweets', nargs='?', type=int, default=2)
 
     def handle(self, *args, **options):
-        print("Start User Extraction")
+        print("Start L2 Exploration")
 
         NEG_THRESH = 30
 
@@ -30,14 +32,14 @@ class Command(BaseCommand):
             authors_l2 = Authors.objects.filter(l2=True, l1_done=True, l2_done=False)
 
             if not authors_l2:
-                pass
+                print("Stage 3.2 sleeping for 180 sec")
+                time.sleep(180)
 
             else:
                 for author in authors_l2:
                     # fetch tweets of each author
                     tweets_response = client.get_users_tweets(id=author.author_id, max_results=100)
-                    # tweets_response[0] tweets list
-                    # tweets_response[3] tweets prev next info
+
                     tweets = tweets_response[0]
 
                     for tweet in tweets:
@@ -74,5 +76,3 @@ class Command(BaseCommand):
                     if (author.neg_count/tot_twt_count)*100 >= NEG_THRESH:
                         author.l3 = True
                     author.save()
-
-            # TODO: Add Sleep

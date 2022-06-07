@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from utils.SaveStream import SaveStream
 from stage_1.models import Tweets
 from utils.TweetCleaner import TweetCleaner
+import time
 
 
 class Command(BaseCommand):
@@ -22,8 +23,10 @@ class Command(BaseCommand):
             data = save_stream.get_recent_stream(
                 count=num_tweets
             )
+            count = 0
 
             for tweet_id in data:
+                count += 1
                 clean_tweet = tweet_cleaner.clean(data[tweet_id]['text'])
 
                 tweet = Tweets(
@@ -34,4 +37,8 @@ class Command(BaseCommand):
                 )
 
                 tweet.save()
-                # TODO: Add Sleep
+
+            print(f"Processed {count} Tweets")
+            print("Stage 1 Sleeping for 60 Seconds")
+
+            time.sleep(60)
