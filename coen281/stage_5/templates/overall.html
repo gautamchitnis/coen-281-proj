@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overall Stats</title>
+    <style>
+        th, td {
+            border: 1px dashed black;
+            {#border-collapse: collapse;#}
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<h3>
+    Overall Statistics of Collected Data
+</h3>
+<table>
+    <tr>
+        <th>Sentiment Chart</th>
+        <th>Emotion Chart</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="data:image/png;base64, {{chart_sent|safe}}" alt="" id="img">
+        </td>
+        <td>
+            <img src="data:image/png;base64, {{chart_emo|safe}}" alt="" id="img">
+        </td>
+    </tr>
+    <tr>
+        <th>Harvest Chart</th>
+        <th>By the Numbers</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="data:image/png;base64, {{chart_harvest|safe}}" alt="" id="img">
+        </td>
+        <td align="center">
+            <b>Total Tweets Fetched:</b> {{ numbers.tweets }}
+            <br/>
+            <br/>
+            <b>Total Authors Encountered:</b> {{ numbers.authors }}
+            <br/>
+            <br/>
+            <b>Estimate Tweets Required w/o author filtering:</b> {{ numbers.est_tweets }}
+            <br/>
+            <br/>
+            <b>Authors explored only up to L1:</b> {{ numbers.l1 }}
+            <br/>
+            <br/>
+            <b>Authors explored only up to L2:</b> {{ numbers.l2 }}
+            <br/>
+            <br/>
+            <b>Authors explored up to L3:</b> {{ numbers.l3 }}
+            <br/>
+            <br/>
+            <b>Authors found uninteresting:</b> {{ numbers.rem }}
+            <br/>
+            <br/>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

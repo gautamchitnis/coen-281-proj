@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>
+    Twitter Based Mental Stress Analyser
+</h2>
+<br/>
+<h3>
+    Available Stats
+</h3>
+<ul>
+    <li>
+        <a href="{% url 'overall' %}">Overall Stats</a>
+    </li>
+</ul>
+<br/>
+{% if authors %}
+<h3>
+    Top 10 users with signs of mental stress from analysed data
+</h3>
+<ul>
+    {% for author in authors %}
+    <li>
+        <a href="{% url 'author' author.author_id %}">{{ author.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Wait for more data to be analysed</p>
+{% endif %}
+</body>
+</html>
