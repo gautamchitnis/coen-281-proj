@@ -4,6 +4,7 @@ from stage_1.models import Tweets
 from stage_2.models import Authors
 from utils.TweetCleaner import TweetCleaner
 from utils.Auth import Auth
+import tweetnlp
 
 
 class Command(BaseCommand):
@@ -23,6 +24,8 @@ class Command(BaseCommand):
 
         tweet_cleaner = TweetCleaner()
 
+        model = tweetnlp.load('sentiment')
+
         while True:
             authors_l1 = Authors.objects.filter(l1=True, l1_done=False)
 
@@ -40,22 +43,28 @@ class Command(BaseCommand):
                     for tweet in tweets:
                         clean_tweet = tweet_cleaner.clean(tweet['data']['text'])
 
-                        # run sent anal
-                        sentiment = 0
-
                         # add tweets to db
                         tweet = Tweets(
                             tweet_id=int(tweet['data']['id']),
                             author_id=author.author_id,
                             tweet_text=tweet['data']['text'],
                             tweet_clean=",".join(clean_tweet),
-                            sentiment_score=sentiment,
                             sentiment_done=True
                         )
-                        tweet.save()
+                        # run sent anal
+                        sentiment = model.sentiment(tweet['data']['text'])
 
-                        if sentiment == 0:
+                        if sentiment == 'negative':
+                            tweet.sentiment_score = 0
                             author.neg_count += 1
+                        elif sentiment == 'neutral':
+                            tweet.sentiment_score = 1
+                            author.neutral_count += 1
+                        elif sentiment == 'positive':
+                            tweet.sentiment_score = 2
+                            author.pos_count += 1
+
+                        tweet.save()
 
                     author.l1_done = True
                     if author.neg_count >= NEG_THRESH:
