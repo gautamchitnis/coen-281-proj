@@ -1,3 +1,4 @@
+import tweetnlp
 from django.core.management.base import BaseCommand, CommandError
 from utils.SaveStream import SaveStream
 from stage_1.models import Tweets
@@ -14,9 +15,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         print("Start User Extraction")
+        e_model = tweetnlp.load('emotion')
+        # model = tweetnlp.load('sentiment')
+        # model = tweetnlp.load('sentiment')
+        # model = tweetnlp.load('sentiment')
 
         while True:
-            authors_l3 = Authors.objects.filter(l3=True, l2_done=True)
+            authors_l3 = Authors.objects.filter(l3=True, l1_done=True, l2_done=True, l3_done=False)
 
             if not authors_l3:
                 pass
@@ -30,12 +35,24 @@ class Command(BaseCommand):
                         clean_tweet = tweet.tweet_clean
 
                         # run ensemble anal
-                        ens = 0
-                        tweet.ens1_score = ens
-                        tweet.save()
+                        emotion = e_model.emotion(tweet_text)
 
-                        if ens == 0:
-                            author.ens1_count += 1
+                        if emotion == 'anger':
+                            tweet.emotion = 0
+                            author.anger_count += 1
+                        elif emotion == 'joy':
+                            tweet.emotion = 1
+                            author.joy_count += 1
+                        elif emotion == 'optimism':
+                            tweet.emotion = 2
+                            author.optimism_count += 1
+                        elif emotion == 'sadness':
+                            tweet.emotion = 3
+                            author.sadness_count += 1
+
+                        # tweet.ens1_score = ens
+
+                        tweet.save()
 
                     author.l3_done = True
                     author.save()

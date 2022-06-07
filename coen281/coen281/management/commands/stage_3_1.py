@@ -52,7 +52,7 @@ class Command(BaseCommand):
                             sentiment_done=True
                         )
                         # run sent anal
-                        sentiment = model.sentiment(tweet['data']['text'])
+                        sentiment = model.sentiment(tweet.tweet_text)
 
                         if sentiment == 'negative':
                             tweet.sentiment_score = 0

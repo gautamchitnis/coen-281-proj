@@ -13,4 +13,7 @@ class Authors(models.Model):
     neutral_count = models.IntegerField(default=0)
     pos_count = models.IntegerField(default=0)
     neg_count = models.IntegerField(default=0)
-    ens1_count = models.IntegerField(default=0)
+    anger_count = models.IntegerField(default=0)
+    joy_count = models.IntegerField(default=0)
+    optimism_count = models.IntegerField(default=0)
+    sadness_count = models.IntegerField(default=0)

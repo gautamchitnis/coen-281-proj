@@ -27,7 +27,7 @@ class Command(BaseCommand):
         model = tweetnlp.load('sentiment')
 
         while True:
-            authors_l2 = Authors.objects.filter(l2=True, l1_done=True)
+            authors_l2 = Authors.objects.filter(l2=True, l1_done=True, l2_done=False)
 
             if not authors_l2:
                 pass
@@ -53,7 +53,7 @@ class Command(BaseCommand):
                         )
 
                         # run sent anal
-                        sentiment = model.sentiment(tweet['data']['text'])
+                        sentiment = model.sentiment(tweet.tweet_text)
 
                         if sentiment == 'negative':
                             tweet.sentiment_score = 0

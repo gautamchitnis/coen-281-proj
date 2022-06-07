@@ -8,5 +8,5 @@ class Tweets(models.Model):
     tweet_text = models.CharField(max_length=1000)
     tweet_clean = models.CharField(max_length=1000, default="")
     sentiment_done = models.BooleanField(default=False)
-    sentiment_score = models.FloatField(default=0)
-    ens1_score = models.FloatField(default=0)
+    sentiment_score = models.IntegerField(default=0)
+    emotion = models.IntegerField(default=-1)
